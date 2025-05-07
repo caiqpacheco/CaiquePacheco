@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Caique Pacheco - Portfólio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: white;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    #rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    header {
+      background-color: #090f80;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.5em;
+    }
+
+    nav {
+      background-color: #222;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #f3f0f0;
+      transform: scale(1.1);
+    }
+
+    section {
+      padding: 60px 30px;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 2em;
+      margin-bottom: 30px;
+      color: #e9e5e5;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .skill {
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+      transition: 0.3s;
+    }
+
+    .skill:hover {
+      transform: scale(1.05);
+    }
+
+    .skill-bar {
+      height: 20px;
+      background-color: #444;
+      border-radius: 10px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .skill-bar span {
+      display: block;
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    .project {
+      background-color: #1e1e1e;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .project:hover {
+      transform: scale(1.05);
+    }
+
+    .contact a {
+      display: inline-block;
+      margin: 10px 20px;
+      font-size: 1.5em;
+      color: #e3e2de;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .contact a:hover {
+      color: #090f80;
+      transform: scale(1.2);
+    }
+
+    footer {
+      background-color: #090f80;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="rain"></canvas>
+
+<nav>
+  <a href="#about">Sobre Mim</a>
+  <a href="#skills">Habilidades</a>
+  <a href="#projects">Projetos</a>
+  <a href="#contact">Contato</a>
+</nav>
+
+<header>
+  <h1>Caique Pacheco</h1>
+  <p>Aqui tudo é baseado em dados 📊</p>
+</header>
+
+<section id="about">
+  <h2>Sobre Mim</h2>
+  <p>Sou entusiasta de tecnologia e dados. Atualmente, estou buscando uma oportunidade de estágio para aplicar e expandir meus conhecimentos na área de dados.</p>
+</section>
+
+<section id="skills">
+  <h2>Minhas Habilidades</h2>
+  <div class="skills">
+    <div class="skill" title="Python é uma linguagem versátil para automação, análise e IA.">
+      <p>Python</p>
+      <div class="skill-bar"><span style="width: 65%; background-color: #00e676;"></span></div>
+    </div>
+    <div class="skill" title="Power BI cria dashboards interativos para análise de dados.">
+      <p>Power BI</p>
+      <div class="skill-bar"><span style="width: 60%; background-color: #00e676;"></span></div>
+    </div>
+    <div class="skill" title="SQL é usado para consultar e manipular dados em bancos.">
+      <p>SQL</p>
+      <div class="skill-bar"><span style="width: 50%; background-color: #00e676;"></span></div>
+    </div>
+    <div class="skill" title="JavaScript traz interatividade aos sites.">
+      <p>JavaScript</p>
+      <div class="skill-bar"><span style="width: 20%; background-color: #e74c3c;"></span></div>
+    </div>
+    <div class="skill" title=".NET é um framework para desenvolvimento de apps.">
+      <p>.NET</p>
+      <div class="skill-bar"><span style="width: 20%; background-color: #e74c3c;"></span></div>
+    </div>
+    <div class="skill" title="HTML5 estrutura conteúdos da web.">
+      <p>HTML5</p>
+      <div class="skill-bar"><span style="width: 50%; background-color: #00e676;"></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projetos</h2>
+  <div class="project">
+    <h3>Projeto 1</h3>
+    <p>Adicione aqui seu primeiro projeto. Pode incluir links, descrições e capturas de tela no futuro.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contato</h2>
+  <div class="contact">
+    <a href="https://www.linkedin.com/in/caique-pacheco-71480218a/" target="_blank" title="Meu LinkedIn">
+      <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="mailto:caiqueplayer24@gmail.com" target="_blank" title="Meu Email">
+      <i class="fas fa-envelope"></i>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Caique Pacheco - Todos os direitos reservados</p>
+</footer>
+
+<!-- Efeito de chuva -->
+<script>
+  const canvas = document.getElementById('rain');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const drops = [];
+  for (let i = 0; i < 200; i++) {
+    drops.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      l: Math.random() * 1,
+      xs: -2 + Math.random() * 4 + 2,
+      ys: Math.random() * 10 + 10
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i < drops.length; i++) {
+      const d = drops[i];
+      ctx.beginPath();
+      ctx.moveTo(d.x, d.y);
+      ctx.lineTo(d.x + d.l * d.xs, d.y + d.l * d.ys);
+      ctx.stroke();
+    }
+    move();
+  }
+
+  function move() {
+    for (let i = 0; i < drops.length; i++) {
+      const d = drops[i];
+      d.x += d.xs;
+      d.y += d.ys;
+      if (d.x > canvas.width || d.y > canvas.height) {
+        d.x = Math.random() * canvas.width;
+        d.y = -20;
+      }
+    }
+  }
+
+  setInterval(draw, 33);
+</script>
+
+</body>
+</html>
