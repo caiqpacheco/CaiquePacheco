@@ -6,6 +6,15 @@
   <title>Caique Pacheco - Portfólio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
+    :root {
+      --primary: #4b0082;
+      --primary-light: #888888; /* cinza no lugar do vermelho */
+      --background: #0a0014;
+      --text: #fff;
+      --text-muted: #bbb;
+      --glass-bg: rgba(255 255 255 / 0.05);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -13,30 +22,12 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: black;
-      color: #FFF; /* texto branco */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background);
+      color: var(--text);
       overflow-x: hidden;
       position: relative;
       scroll-behavior: smooth;
-    }
-
-    #matrix {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      background: black;
-    }
-
-    header {
-      text-align: center;
-      padding: 60px 20px;
-      border-bottom: 2px solid #4b0082;
-      color: #FFF;
-      animation: fadeInDown 1.5s ease-in-out;
     }
 
     nav {
@@ -48,159 +39,279 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      border-bottom: 1px solid #8b0000;
+      border-bottom: 1px solid var(--primary-light);
       animation: fadeIn 2s ease-in-out;
     }
 
     nav a {
-      color: #FFF;
+      color: var(--text);
       text-decoration: none;
       font-size: 1.1em;
       transition: 0.3s;
+      font-weight: 600;
     }
 
-    nav a:hover {
-      color: #8b0000;
+    nav a:hover,
+    nav a:focus {
+      color: var(--primary-light);
       transform: scale(1.1);
+      outline: none;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      border-bottom: 2px solid var(--primary);
+      animation: fadeInDown 1.5s ease-in-out;
+    }
+
+    header h1 {
+      font-weight: 900;
+      font-size: 3em;
+      color: var(--primary-light);
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px var(--primary-light);
+    }
+
+    header p {
+      font-size: 1.3em;
+      margin-top: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
     }
 
     section {
-      padding: 60px 30px;
-      text-align: center;
-      background-color: rgba(10, 0, 20, 0.8);
-      margin: 20px auto;
-      width: 90%;
-      border-radius: 15px;
-      box-shadow: 0 0 15px #4b0082;
-      color: #FFF;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 40px 30px;
+      border-radius: 20px;
+      background: var(--glass-bg);
+      box-shadow: 0 0 20px var(--primary);
+      color: var(--text);
       animation: fadeInUp 1s ease-in-out;
+      backdrop-filter: blur(15px);
     }
 
     section h2 {
-      font-size: 2em;
+      font-size: 2.5em;
       margin-bottom: 30px;
-      color: #FFF;
+      color: var(--primary-light);
+      text-align: center;
+      font-weight: 700;
+      text-shadow: 0 0 10px var(--primary-light);
     }
 
-    .skills {
+    #profile {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: left;
+    }
+
+    #profile img.profile-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 4px solid var(--primary);
+      box-shadow: 0 0 15px var(--primary-light);
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    #profile p {
+      font-size: 1.2em;
+      max-width: 480px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    #skills {
+      position: relative;
+    }
+
+    #skills .skills-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 30px;
-      margin-top: 40px;
+      margin-top: 20px;
+      color: var(--text);
     }
 
     .skill {
       background-color: rgba(0, 0, 50, 0.8);
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #4b0082;
-      transition: 0.3s;
-      color: #FFF;
-      animation: fadeIn 1s ease-in-out;
+      border-radius: 12px;
+      box-shadow: 0 0 15px var(--primary);
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1em;
+      transition: transform 0.3s ease;
     }
 
-    .skill:hover {
+    .skill:hover,
+    .skill:focus {
       transform: scale(1.05);
+      outline: none;
+      box-shadow: 0 0 25px var(--primary-light);
     }
 
-    .skill-bar {
-      height: 20px;
-      background-color: #222;
-      border-radius: 10px;
-      margin-top: 10px;
-      overflow: hidden;
+    /* Chart container */
+    #skillChartContainer {
+      margin-top: 50px;
+      max-width: 100%;
+      text-align: center;
     }
 
-    .skill-bar span {
-      display: block;
-      height: 100%;
-      border-radius: 10px;
-      background-color: #8b0000; /* vinho */
-    }
-
-    .project {
-      background-color: rgba(0, 0, 50, 0.8);
+    canvas#skillChart {
+      max-width: 100%;
+      height: 350px !important;
+      box-shadow: 0 0 30px var(--primary-light);
+      border-radius: 15px;
+      background: rgba(255 255 255 / 0.05);
       padding: 20px;
+      backdrop-filter: blur(15px);
+    }
+
+    #projects .project {
+      background-color: rgba(0, 0, 50, 0.8);
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px var(--primary);
+      transition: transform 0.3s ease;
+      color: var(--text);
+    }
+
+    #projects .project:hover,
+    #projects .project:focus {
+      transform: scale(1.04);
+      outline: none;
+      box-shadow: 0 0 40px var(--primary-light);
+    }
+
+    #projects .project h3 {
+      color: var(--primary-light);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    #projects .project a {
+      color: var(--primary-light);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    #projects .project a:hover,
+    #projects .project a:focus {
+      color: var(--text);
+      outline: none;
+    }
+
+    #contact {
+      text-align: center;
+    }
+
+    #contact .contact {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    #contact .contact a {
+      color: var(--text);
+      font-size: 2.5em;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    #contact .contact a:hover,
+    #contact .contact a:focus {
+      color: var(--primary-light);
+      transform: scale(1.3);
+      outline: none;
+    }
+
+    #download-cv {
+      max-width: 400px;
+      margin: 40px auto 80px;
+      background: var(--glass-bg);
+      border-radius: 15px;
+      padding: 30px 25px;
+      box-shadow: 0 0 20px var(--primary);
+      text-align: center;
+    }
+
+    #download-cv p {
       margin-bottom: 20px;
+      font-size: 1.1em;
+    }
+
+    #download-cv form input[type="text"],
+    #download-cv form input[type="email"] {
+      padding: 12px 15px;
+      width: 100%;
+      margin: 10px 0;
       border-radius: 10px;
-      transition: 0.3s;
-      box-shadow: 0 0 10px #4b0082;
-      animation: fadeInUp 1.5s ease-in-out;
-      color: #FFF;
+      border: none;
+      font-size: 1em;
+      outline: none;
+      transition: box-shadow 0.3s ease;
     }
 
-    .project:hover {
-      transform: scale(1.05);
+    #download-cv form input[type="text"]:focus,
+    #download-cv form input[type="email"]:focus {
+      box-shadow: 0 0 10px var(--primary-light);
     }
 
-    .project a {
-      color: #8b0000;
-      text-decoration: none;
-      font-weight: bold;
+    #download-cv form button {
+      margin-top: 15px;
+      padding: 12px 30px;
+      width: 100%;
+      background-color: var(--primary-light);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
-    .project a:hover {
-      color: #FFF;
+    #download-cv form button:hover,
+    #download-cv form button:focus {
+      background-color: #666666;
+      outline: none;
     }
 
-    .contact a {
+    #download-link a {
+      color: var(--primary-light);
+      font-weight: 700;
+      text-decoration: underline;
+      font-size: 1.1em;
       display: inline-block;
-      margin: 10px 20px;
-      font-size: 1.5em;
-      color: #FFF;
-      text-decoration: none;
-      transition: 0.3s;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-
-    .contact a:hover {
-      color: #8b0000;
-      transform: scale(1.2);
+      margin-top: 20px;
     }
 
     footer {
       background-color: #000;
-      padding: 20px;
+      padding: 25px 15px;
       text-align: center;
-      color: #FFF;
-      margin-top: 40px;
-      border-top: 1px solid #8b0000;
-      animation: fadeIn 2s ease-in-out;
+      color: var(--text);
+      font-weight: 600;
+      border-top: 1px solid var(--primary-light);
+      user-select: none;
     }
 
-    img.profile-photo {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 4px solid #4b0082;
-      box-shadow: 0 0 15px #8b0000;
-      margin-top: 20px;
-    }
-
-    form input[type="text"],
-    form input[type="email"] {
-      padding: 10px;
-      width: 250px;
-      border: none;
-      border-radius: 8px;
-      margin: 5px;
-    }
-
-    form button {
-      margin-top: 15px;
-      padding: 10px 30px;
-      background-color: #8b0000;
-      color: #fff;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      nav {
+    @media (max-width: 700px) {
+      #profile {
         flex-direction: column;
-        gap: 10px;
+        text-align: center;
+      }
+
+      #profile p {
+        max-width: 100%;
       }
     }
 
@@ -221,8 +332,6 @@
   </style>
 </head>
 <body>
-  <canvas id="matrix"></canvas>
-
   <nav>
     <a href="#profile">Quem Sou</a>
     <a href="#skills">Habilidades</a>
@@ -236,101 +345,102 @@
     <p>Aqui tudo é baseado em dados 📊</p>
   </header>
 
-  <section id="profile">
-    <h2>Quem Sou</h2>
-    <img src="foto-caique.jpg" alt="Foto de Caique" class="profile-photo" />
-    <p style="margin-top:20px; font-size:1.2em; max-width:600px; margin-inline:auto;">
+  <section id="profile" tabindex="0" aria-label="Seção quem sou">
+    <img src="foto-caique.jpg" alt="Foto de Caique Pacheco" class="profile-photo" />
+    <p>
       Sou apaixonado por dados e inovação. Busco transformar dados em decisões estratégicas usando ferramentas como Python, Power BI e SQL. Adoro decifrar padrões e criar dashboards inteligentes.
     </p>
   </section>
 
-  <section id="skills">
+  <section id="skills" tabindex="0" aria-label="Seção habilidades">
     <h2>Minhas Habilidades</h2>
-    <div class="skills">
-      <div class="skill"><p>Python</p><div class="skill-bar"><span style="width: 65%;"></span></div></div>
-      <div class="skill"><p>Power BI</p><div class="skill-bar"><span style="width: 60%;"></span></div></div>
-      <div class="skill"><p>SQL</p><div class="skill-bar"><span style="width: 50%;"></span></div></div>
-      <div class="skill"><p>JavaScript</p><div class="skill-bar"><span style="width: 20%;"></span></div></div>
-      <div class="skill"><p>.NET</p><div class="skill-bar"><span style="width: 20%;"></span></div></div>
-      <div class="skill"><p>HTML5</p><div class="skill-bar"><span style="width: 50%;"></span></div></div>
+
+    <div class="skills-list" aria-label="Lista das linguagens e ferramentas dominadas">
+      <div class="skill" tabindex="0">Python</div>
+      <div class="skill" tabindex="0">Power BI</div>
+      <div class="skill" tabindex="0">SQL</div>
+      <div class="skill" tabindex="0">JavaScript</div>
+      <div class="skill" tabindex="0">Excel</div>
+      <div class="skill" tabindex="0">HTML5</div>
+    </div>
+
+    <div id="skillChartContainer">
+      <canvas id="skillChart" aria-label="Gráfico interativo das habilidades"></canvas>
     </div>
   </section>
 
-  <section id="projects">
+  <section id="projects" tabindex="0" aria-label="Seção projetos">
     <h2>Projetos</h2>
 
-    <div class="project">
+    <div class="project" tabindex="0">
       <h3>Análise de Vendas para Petshop</h3>
       <p>Projeto focado em análise detalhada das vendas de um petshop, com dashboards e insights para melhorar a gestão.</p>
       <div style="margin: 15px 0;">
-        <strong>Imagens do projeto:</strong><br>
-        <a href="petshop-analise.png" target="_blank" style="color:#8b0000; text-decoration:underline; margin-right: 10px;">Imagem 1</a>
-        <a href="link-da-imagem2.jpg" target="_blank" style="color:#8b0000; text-decoration:underline;">Imagem 2</a>
+        <strong>Imagens do projeto:</strong><br />
+        <a href="petshop-analise.png" target="_blank" rel="noopener noreferrer" style="color: var(--primary-light);">Imagem 1</a>
+        <a href="link-da-imagem2.jpg" target="_blank" rel="noopener noreferrer" style="color: var(--primary-light); margin-left: 12px;">Imagem 2</a>
       </div>
       <div>
-        <strong>Vídeo demonstrativo:</strong><br>
-        <iframe width="100%" height="315" 
+        <strong>Vídeo demonstrativo:</strong><br />
+        <iframe 
           src="https://www.youtube.com/embed/ngRYkEiV7ko" 
           title="Análise Petshop" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          allowfullscreen 
-          style="max-width:600px; border-radius:10px; box-shadow:0 0 10px #4b0082; margin-top:10px;">
-        </iframe>
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+          loading="lazy"
+          ></iframe>
       </div>
-      <p style="margin-top:10px; font-style: italic; color: #ccc;">
+      <p style="margin-top:10px; font-style: italic; color: var(--text-muted);">
         Tecnologias usadas: Python, Power BI, SQL, Pandas, Matplotlib.
       </p>
     </div>
 
-    <div class="project">
+    <div class="project" tabindex="0">
       <h3>Análise de Riscos e Custos para Seguradora</h3>
       <p>Projeto voltado para análise de riscos e custos em uma seguradora, utilizando dados para melhorar decisões estratégicas.</p>
       <div style="margin: 15px 0;">
-        <strong>Imagens do projeto:</strong><br>
-        <a href="seguradora-analise.png" target="_blank" style="color:#8b0000; text-decoration:underline; margin-right: 10px;">Imagem 1</a>
-        <a href="link-da-imagem4.jpg" target="_blank" style="color:#8b0000; text-decoration:underline;">Imagem 2</a>
+        <strong>Imagens do projeto:</strong><br />
+        <a href="seguradora-analise.png" target="_blank" rel="noopener noreferrer" style="color: var(--primary-light);">Imagem 1</a>
+        <a href="link-da-imagem4.jpg" target="_blank" rel="noopener noreferrer" style="color: var(--primary-light); margin-left: 12px;">Imagem 2</a>
       </div>
       <div>
-        <strong>Vídeo demonstrativo:</strong><br>
-        <iframe width="100%" height="315" 
+        <strong>Vídeo demonstrativo:</strong><br />
+        <iframe 
           src="https://www.youtube.com/embed/o94_9hhPPc4" 
           title="Análise Seguradora" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          allowfullscreen 
-          style="max-width:600px; border-radius:10px; box-shadow:0 0 10px #4b0082; margin-top:10px;">
-        </iframe>
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+          loading="lazy"
+          ></iframe>
       </div>
-      <p style="margin-top:10px; font-style: italic; color: #ccc;">
+      <p style="margin-top:10px; font-style: italic; color: var(--text-muted);">
         Tecnologias usadas: Python, Power BI, SQL, Excel, Tableau.
       </p>
     </div>
   </section>
 
-  <section id="contact">
+  <section id="contact" tabindex="0" aria-label="Seção de contato">
     <h2>Contato</h2>
     <div class="contact">
-      <a href="https://www.linkedin.com/in/caique-pacheco-71480218a/" target="_blank" title="Meu LinkedIn">
+      <a href="https://www.linkedin.com/in/caique-pacheco-71480218a/" target="_blank" rel="noopener noreferrer" title="Meu LinkedIn" aria-label="LinkedIn de Caique Pacheco" tabindex="0">
         <i class="fab fa-linkedin"></i>
       </a>
-      <a href="mailto:caiqueplayer24@gmail.com" target="_blank" title="Meu Email">
+      <a href="mailto:caiqueplayer24@gmail.com" target="_blank" rel="noopener noreferrer" title="Meu Email" aria-label="Enviar email para Caique Pacheco" tabindex="0">
         <i class="fas fa-envelope"></i>
       </a>
     </div>
   </section>
 
-  <section id="download-cv">
+  <section id="download-cv" tabindex="0" aria-label="Seção baixar currículo">
     <h2>Baixar Meu Currículo</h2>
     <p>Preencha com seu nome e email para fazer o download:</p>
-    <form onsubmit="handleForm(event)" style="margin-top:20px;">
-      <input type="text" id="nome" placeholder="Seu nome" required />
-      <input type="email" id="email" placeholder="Seu e-mail" required />
-      <br />
+    <form onsubmit="handleForm(event)" aria-label="Formulário para baixar currículo" autocomplete="off" novalidate>
+      <input type="text" id="nome" name="nome" placeholder="Seu nome" required aria-required="true" />
+      <input type="email" id="email" name="email" placeholder="Seu e-mail" required aria-required="true" />
       <button type="submit">Baixar Currículo</button>
     </form>
     <div id="download-link" style="margin-top:20px; display:none;">
-      <a href="CaiqueCV.pdf" download style="color:#8b0000; font-weight:bold; text-decoration:underline;">Clique aqui para baixar</a>
+      <a href="CaiqueCV.pdf" download style="color: var(--primary-light); font-weight: 700; text-decoration: underline;">Clique aqui para baixar</a>
     </div>
   </section>
 
@@ -338,7 +448,100 @@
     <p>&copy; 2025 Caique Pacheco - Todos os direitos reservados</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+    // Dados para o gráfico de habilidades
+    const data = {
+      labels: ['Python', 'Power BI', 'SQL', 'JavaScript', 'Excel', 'HTML5'],
+      datasets: [{
+        label: 'Nível de Proficiência (%)',
+        data: [85, 90, 50, 20, 90, 50],
+        backgroundColor: [
+          'rgba(136, 136, 136, 0.7)',
+          'rgba(75, 0, 130, 0.7)',
+          'rgba(0, 123, 255, 0.7)',
+          'rgba(255, 193, 7, 0.7)',
+          'rgba(136, 136, 136, 0.7)',
+          'rgba(128, 0, 128, 0.7)'
+        ],
+        borderColor: [
+          'rgba(136, 136, 136, 1)',
+          'rgba(75, 0, 130, 1)',
+          'rgba(0, 123, 255, 1)',
+          'rgba(255, 193, 7, 1)',
+          'rgba(136, 136, 136, 1)',
+          'rgba(128, 0, 128, 1)'
+        ],
+        borderWidth: 2,
+        borderRadius: 5,
+        maxBarThickness: 50
+      }]
+    };
+
+    // Configurações do gráfico
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            enabled: true,
+            backgroundColor: 'rgba(0,0,0,0.85)',
+            titleColor: '#FFF',
+            bodyColor: '#FFF',
+            cornerRadius: 6,
+            titleFont: { size: 16, weight: 'bold' },
+            bodyFont: { size: 14 }
+          },
+          title: {
+            display: true,
+            text: 'Minhas Linguagens e Ferramentas',
+            color: '#FFF',
+            font: {
+              size: 20,
+              weight: 'bold'
+            },
+            padding: { top: 10, bottom: 20 }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              color: '#FFF',
+              font: { size: 14 },
+              stepSize: 10,
+              callback: val => val + '%'
+            },
+            grid: { color: 'rgba(255, 255, 255, 0.2)' }
+          },
+          x: {
+            ticks: {
+              color: '#FFF',
+              font: { size: 14 }
+            },
+            grid: { display: false }
+          }
+        },
+        animation: {
+          duration: 1500,
+          easing: 'easeOutBounce'
+        },
+        interaction: {
+          mode: 'nearest',
+          intersect: true
+        }
+      }
+    };
+
+    window.onload = () => {
+      const ctx = document.getElementById('skillChart').getContext('2d');
+      new Chart(ctx, config);
+    };
+
     // Formulário para liberar download do currículo
     function handleForm(event) {
       event.preventDefault();
@@ -349,41 +552,6 @@
         document.getElementById('download-link').style.display = 'block';
       }
     }
-
-    // Efeito Matrix no fundo
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
-    const letters = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソタダチッヂヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワンabcdefghijklmnopqrstuvwxyz0123456789";
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-
-    function draw() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#0F0";  // verde clássico do Matrix
-      ctx.font = fontSize + "px monospace";
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-
-    setInterval(draw, 33);
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
   </script>
 </body>
 </html>
